@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    button{
+        width: auto;
+        height: auto;
+        font-size: 22px;
+        padding: 10px;
+        margin: 20px;
+        background-color: darkblue;
+        color: azure;
+        border: 5px solid rgb(71, 71, 226);
+        border-radius: 5px;
+    }
+    #vopros{
+        font-size: 25px;
+        color: blue;
+    }
+    button:hover{
+        background-color: aqua;
+        color: blue;
+    }
+    img{
+        height: 250px;
+        width: auto;
+    }
+    body{
+        background-color: black;
+    }
+</style>
+<body>
+    <img id="voprosImg" src="name.jpeg">
+    <div id="vopros"> </div>
+    <button onclick="proverkaOtveta(0)"> </button>
+    <button onclick="proverkaOtveta(1)"> </button>
+    
+    <script>
+
+        let kartinli = ["0s.jpg" ,"1s.jpg", "2s.jpg","3s.jpg","4s.jpg","5s.jpg","6s.jpg"]
+        let indexMyKartinka = 0;
+
+        let voposy = [
+            {
+             voposik:"Вопрос 1: Какого цвета Солнце?",
+             otvetik: ["желтый", "белый"],
+             pravilnyOtvet: 1
+            },
+            {
+             voposik:"Вопрос 2: Кто живет на дне океана?",
+             otvetik: ["Спанч Боб", "Акула"],
+             pravilnyOtvet: 0
+            },
+            {
+             voposik:"Вопрос 3: Как расшифровывается HTML?",
+             otvetik: ["HyperText Markup Language", "Hyper Text Model Log"],
+             pravilnyOtvet: 0
+            },
+            {
+                voposik : 'вопрос 4: как рашифровывается CSS?',
+        otvetik : ['Class Style Sonk','Cascading Style Sheets' ],
+        pravilnyOtvet : 1
+
+    }
+    ,
+    {
+        voposik : 'вопрос 5 : какого цвета жопа бабуина?',
+        otvetik : ['красного','бежевого'],
+        pravilnyOtvet : 0
+    }
+    ,
+    {
+        voposik: 'вопрос 6: HTML  это язык прогромирование? ',
+        otvetik: ['нет','да'],
+        pravilnyOtvet : 0
+    }
+    ,
+    {
+        voposik: 'вопрос 7: Хочешь спать? ',
+        otvetik: ['нет','да'],
+        pravilnyOtvet : 0
+    }
+        ]
+
+        let voprosIndexSeichas = 0
+
+        function akranVopros(){
+            document.getElementById("vopros").innerHTML = voposy[voprosIndexSeichas].voposik
+            let buttons = document.querySelectorAll("button")
+            voposy[voprosIndexSeichas].otvetik.forEach((otvet, index) => {
+                buttons[index].innerText =  otvet
+            })
+        }
+        function proverkaOtveta(indexOtvet){
+            if(indexOtvet === voposy[voprosIndexSeichas].pravilnyOtvet){
+                indexMyKartinka++
+                if(indexMyKartinka >= kartinli.length){
+                    indexMyKartinka = 0
+                }
+                document.getElementById("voprosImg").src = kartinli[indexMyKartinka];           
+            }
+            voprosIndexSeichas++;
+            if(voprosIndexSeichas < voposy.length){
+                akranVopros()
+            }
+            else{
+                document.getElementById("vopros").innerHTML = "Викторина завершена"
+                document.querySelectorAll("button").forEach(button => button.style.display = "none")
+            }
+
+           
+        }
+        akranVopros()
+    </script>
+
+</body>
+</html>
